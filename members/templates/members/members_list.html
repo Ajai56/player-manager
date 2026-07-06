@@ -1,0 +1,34 @@
+{% extends 'members/base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>🏏 Players List</h2>
+    <a href="{% url 'player_create' %}" class="btn btn-success">Add Player</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Number</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.player_name }}</td>
+            <td>{{ player.player_age }}</td>
+            <td>{{ player.player_number }}</td>
+            <td>
+                <a href="{% url 'player_update' player.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'player_delete' player.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
