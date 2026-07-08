@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import player
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from rest_framework import viewsets
+from .serializers import PlayerSerializer
 
 @login_required
 def player_list(request):
@@ -47,4 +49,8 @@ def register(request):
         form = UserCreationForm()
         return render(request, 'registration/register.html', {'form':form})
 
+
+class PlayerViewSet(viewsets.ModelViewSet):
+    queryset = player.objects.all()
+    serializer_class = PlayerSerializer
 # Create your views here.
